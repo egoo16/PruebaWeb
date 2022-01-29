@@ -1,0 +1,14 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Backend para prueba de JS/TS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Geovany Ocaña",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
