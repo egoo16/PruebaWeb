@@ -1,18 +1,22 @@
 // requires
 var express = require('express');
-
-
-// Inicializar variables
 var app = express();
+var bodyParser = require('body-parser');
+
+// Settings to BodyParser
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+
+//Importacion de Rutas
+var appRoutes = require('./routes/app');
+var credentialRoutes = require('./routes/credential');
+var messageRoutes = require('./routes/message');
 
 // Routes
-
-app.get('/', (req, res, next) => {
-    res.status(200).json({
-        status: true,
-        message: 'Petición realizada correctamente'
-    });
-});
+app.use('/message',messageRoutes);
+app.use('/credential',credentialRoutes);
+app.use('/',appRoutes);
 
 
 // Escucha de Peticiones
