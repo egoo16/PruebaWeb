@@ -29,9 +29,7 @@ export class InterceptorService implements HttpInterceptor {
 
 
     const reqClone = req.clone({headers});
-    console.log(reqClone);
 
-    console.log('Interceptor');
     return next.handle(reqClone);
   }
 

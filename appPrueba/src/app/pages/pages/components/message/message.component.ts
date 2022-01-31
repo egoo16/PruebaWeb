@@ -43,7 +43,6 @@ export class MessageComponent implements OnInit {
     this.messageService.getAllMessages().subscribe((res: any) => {
       this.dataSource = res.msgs;
       this.loading = false;
-      console.log(this.dataSource);      
     });
   }
 
@@ -61,7 +60,6 @@ export class MessageComponent implements OnInit {
     this.messageService.findByID(id).subscribe((res: any) => {
       this.dataSource.push(res.msg);
       this.loading = false;
-      console.log(this.dataSource);      
     });
   }
 
@@ -73,7 +71,6 @@ export class MessageComponent implements OnInit {
     this.messageService.findByTag(TAG).subscribe((res: any) => {
       this.dataSource = res.msgs;
       this.loading = false;
-      console.log(this.dataSource);      
     });
   }
 }

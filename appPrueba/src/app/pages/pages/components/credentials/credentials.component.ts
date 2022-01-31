@@ -26,7 +26,6 @@ export class CredentialsComponent implements OnInit {
   }
 
   sendCredentials(): void {
-    console.log(this.form);
     if (!this.form.valid) {
       this._snackBar.open('Llene todos los campos','',{duration: 2000});
       return;

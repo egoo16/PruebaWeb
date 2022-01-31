@@ -50,7 +50,6 @@ if (messages.length > 0) {
 app.get("/:tag", mdAuth.aunthenticate, (req, res) => {
     let {tag} = req.params;    
 
-  console.log("Entro a Tag");
 //   var tag = req.params.tag;
   var messages = JSON.parse(localStorage.getItem("messages"));
   var tagLow = tag.toLowerCase();
@@ -84,10 +83,6 @@ app.get("/findID/:id", mdAuth.aunthenticate, (req, res) => {
 
   var messages = JSON.parse(localStorage.getItem("messages"));
   var findMsg = messages.find((e) => e.id == id);
-
-  console.log(id);
-  console.log(messages);
-  console.log(findMsg);
 
   if (findMsg) {
     res.status(200).json({

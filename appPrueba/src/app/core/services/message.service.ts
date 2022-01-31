@@ -25,7 +25,6 @@ export class MessageService {
     const url = this.API_URL + 'message';
     return this.http.get(url).pipe(
       map((res: any) => {
-        console.log(res);
         return res;
       }),
       catchError((err, caught) => {
@@ -47,7 +46,6 @@ export class MessageService {
     const url = this.API_URL + 'message';
     return this.http.post(url, message).pipe(
       map((res: any) => {
-        console.log(res);
         return res;
       }),
       catchError((err, caught) => {
@@ -69,7 +67,6 @@ export class MessageService {
     const url = this.API_URL + 'message/findID/' + id;
     return this.http.get(url).pipe(
       map((res: any) => {
-        console.log(res);
         return res;
       }),
       catchError((err, caught) => {
@@ -91,7 +88,6 @@ export class MessageService {
     const url = this.API_URL + 'message/' + tag;
     return this.http.get(url).pipe(
       map((res: any) => {
-        console.log(res);
         return res;
       }),
       catchError((err, caught) => {

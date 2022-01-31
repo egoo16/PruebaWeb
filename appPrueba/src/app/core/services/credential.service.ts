@@ -22,7 +22,6 @@ export class CredentialService {
     const url = this.API_URL + 'credential';
     return this.http.put(url, credentials).pipe(
       map((res: any) => {
-          console.log(res);
         return res;
       }),
       catchError((err, caught) => {
