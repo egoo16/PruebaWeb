@@ -25,6 +25,25 @@ app.post("/", (req, res) => {
   });
 });
 
+//Method To Get All Messages
+app.get("/", (req, res) => {
+
+var messages = JSON.parse(localStorage.getItem("messages"));
+
+if (messages.length > 0) {
+  res.status(200).json({
+    status: true,
+    msgs: messages,
+  });
+} else {
+  res.status(404).json({
+    status: false,
+    msg: "No Encontrado",
+  });
+}
+});
+
+
 // Method Get to Messages FindByTAGS
 app.get("/:tag", (req, res) => {
     let {tag} = req.params;    

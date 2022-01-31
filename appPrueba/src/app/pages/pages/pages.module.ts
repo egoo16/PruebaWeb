@@ -6,15 +6,19 @@ import { CredentialsComponent } from './components/credentials/credentials.compo
 import { MessageComponent } from './components/message/message.component';
 import { MaterialModule } from '../../material.module';
 import { FlexModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AddMessageComponent } from './components/add-message/add-message.component';
 
 
 
 @NgModule({
   declarations: [
     CredentialsComponent,
-    MessageComponent
+    MessageComponent,
+    AddMessageComponent
   ],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     RouterModule.forChild(PagesRoutes),
     MaterialModule,

@@ -1,37 +1,57 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MessageService } from 'src/app/core/services/message.service';
+import { MessageResponse } from '../../../../core/models/message';
+import { AddMessageComponent } from '../add-message/add-message.component';
 
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
-  styleUrls: ['./message.component.css']
+  styleUrls: ['./message.component.css'],
 })
 export class MessageComponent implements OnInit {
+  loading = true;
+  form1: FormGroup;
+  form2: FormGroup;
+
+  dataSource: MessageResponse[] = [];
+
   displayedColumns: string[] = ['ID', 'message', 'tags'];
-  dataSource = ELEMENT_DATA;
-  constructor() { }
+  constructor(
+    private _snackBar: MatSnackBar,
+    private messageService: MessageService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
+
+    //Getting all messages
+    this.getAllMessages();
+
+    this.form1 = new FormGroup({
+      searchID: new FormControl(null, Validators.required),
+    });
+    this.form2 = new FormGroup({
+      searchTAG: new FormControl(null, Validators.required),
+    });
   }
 
+  getAllMessages(): void {
+    this.loading = true;
+    this.messageService.getAllMessages().subscribe((res: any) => {
+      this.dataSource = res.msgs;
+      this.loading = false;
+      console.log(this.dataSource);      
+    });
+  }
+
+  addMessage(): void {
+    
+    const dialogo = this.dialog.open(AddMessageComponent);
+    dialogo.afterClosed().subscribe( res => {
+      this.getAllMessages();
+    });
+  }
 }
