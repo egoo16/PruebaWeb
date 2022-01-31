@@ -9,7 +9,7 @@
 
         <div fxLayout="row wrap">
             <div fxFlex="50">
-                <form ngNativeCalidate [formGroup]="form1">
+                <form ngNativeCalidate [formGroup]="formID">
                     <mat-card class="card-margin">
                         <mat-card-title>Buscar por ID</mat-card-title>
                         <div fxLayout="row" fxLayoutAlign="start">
@@ -19,7 +19,7 @@
                             </mat-form-field>
                         </div>
                         <mat-card-actions>
-                            <button color="primary" mat-button>Buscar</button>
+                            <button (click)="findMessageByID()" color="primary" mat-button>Buscar</button>
                         </mat-card-actions>
                     </mat-card>
                 </form>
@@ -28,7 +28,7 @@
             </div>
 
             <div fxFlex="50">
-                <form ngNativeCalidate [formGroup]="form2">
+                <form ngNativeCalidate [formGroup]="formTAG">
                     <mat-card class="card-margin">
                         <mat-card-title>Buscar por TAG</mat-card-title>
                         <div fxLayout="row" fxLayoutAlign="start">
@@ -38,7 +38,7 @@
                             </mat-form-field>
                         </div>
                         <mat-card-actions>
-                            <button color="primary" mat-button>Buscar</button>
+                            <button (click)="findMessageByTAG()" color="primary" mat-button>Buscar</button>
                         </mat-card-actions>
                     </mat-card>
                 </form>
@@ -49,7 +49,7 @@
             No hay Datos Registrados
         </div>
 
-        <div fxLayout="row wrap" *ngIf="dataSource.length > 0 && loading === false">
+        <div fxLayout="row wrap" *ngIf="!dataSource || dataSource.length > 0 && loading === false">
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
                 <ng-container matColumnDef="ID">

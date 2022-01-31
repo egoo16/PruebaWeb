@@ -77,7 +77,7 @@ app.get("/:tag", (req, res) => {
 
 
 // Method Get to Message FindByID
-app.get("/:id", (req, res) => {
+app.get("/findID/:id", (req, res) => {
     let {id} = req.params;
 
   var messages = JSON.parse(localStorage.getItem("messages"));

@@ -63,4 +63,48 @@ export class MessageService {
       })
     );
   }
+
+  // Service to Find Message by ID
+  findByID(id: string): any {
+    const url = this.API_URL + 'message/findID/' + id;
+    return this.http.get(url).pipe(
+      map((res: any) => {
+        console.log(res);
+        return res;
+      }),
+      catchError((err, caught) => {
+        this._snackBar.open(
+          'Ocurrio un error: ' +
+            err.error.msg +
+            ' ErrorCode: ' +
+            err.status,
+          '',
+          { duration: 2000 }
+        );
+        return throwError(err);
+      })
+    );
+  }
+
+  // Service to Find Message by TAG
+  findByTag(tag: string): any {
+    const url = this.API_URL + 'message/' + tag;
+    return this.http.get(url).pipe(
+      map((res: any) => {
+        console.log(res);
+        return res;
+      }),
+      catchError((err, caught) => {
+        this._snackBar.open(
+          'Ocurrio un error: ' +
+            err.error.msg +
+            ' ErrorCode: ' +
+            err.status,
+          '',
+          { duration: 2000 }
+        );
+        return throwError(err);
+      })
+    );
+  }
 }

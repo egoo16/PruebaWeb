@@ -13,8 +13,8 @@ import { AddMessageComponent } from '../add-message/add-message.component';
 })
 export class MessageComponent implements OnInit {
   loading = true;
-  form1: FormGroup;
-  form2: FormGroup;
+  formID: FormGroup;
+  formTAG: FormGroup;
 
   dataSource: MessageResponse[] = [];
 
@@ -30,10 +30,10 @@ export class MessageComponent implements OnInit {
     //Getting all messages
     this.getAllMessages();
 
-    this.form1 = new FormGroup({
+    this.formID = new FormGroup({
       searchID: new FormControl(null, Validators.required),
     });
-    this.form2 = new FormGroup({
+    this.formTAG = new FormGroup({
       searchTAG: new FormControl(null, Validators.required),
     });
   }
@@ -48,10 +48,32 @@ export class MessageComponent implements OnInit {
   }
 
   addMessage(): void {
-    
     const dialogo = this.dialog.open(AddMessageComponent);
     dialogo.afterClosed().subscribe( res => {
       this.getAllMessages();
+    });
+  }
+
+  findMessageByID(): void {
+    this.loading = true;
+    this.dataSource = [];
+    const id = this.formID.value.searchID;
+    this.messageService.findByID(id).subscribe((res: any) => {
+      this.dataSource.push(res.msg);
+      this.loading = false;
+      console.log(this.dataSource);      
+    });
+  }
+
+  
+  findMessageByTAG(): void {
+    this.loading = true;
+    this.dataSource = [];
+    const TAG = this.formTAG.value.searchTAG;
+    this.messageService.findByTag(TAG).subscribe((res: any) => {
+      this.dataSource = res.msgs;
+      this.loading = false;
+      console.log(this.dataSource);      
     });
   }
 }
