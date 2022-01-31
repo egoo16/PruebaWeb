@@ -1,4 +1,4 @@
-var CryptoJS = require("CryptoJS");
+const CryptoJS = require("crypto-js");
 
 exports.aunthenticate = function (req, res, next) {
   // Get headers
@@ -20,7 +20,7 @@ exports.aunthenticate = function (req, res, next) {
   } else {
     return res.status(403).json({
       ok: false,
-      mensaje: "Forbidden",
+      message: "Ingresa Credenciales Validas",
     });
   }
 };

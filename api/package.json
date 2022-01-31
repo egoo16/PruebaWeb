@@ -13,6 +13,7 @@
     "body-parser": "^1.19.1",
     "crypto-js": "^4.1.1",
     "express": "^4.17.2",
+    "express-crypto": "1.0.5",
     "jsonwebtoken": "^8.5.1",
     "node-localstorage": "^2.2.1",
     "typescript": "^4.5.5"

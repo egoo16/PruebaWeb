@@ -26,6 +26,8 @@ export class CredentialService {
         return res;
       }),
       catchError((err, caught) => {
+        sessionStorage.removeItem('key'); 
+        sessionStorage.removeItem('shared_secret');
         this._snackBar.open('Ocurrio un error: ' + err.error.message + " ErrorCode: " + err.status,'',{duration: 2000});
         return throwError(err);
       })

@@ -37,6 +37,8 @@ export class CredentialsComponent implements OnInit {
     this.credentialService.sendCredentials(this.credential).subscribe((res: any) => {
       this._snackBar.open('Credenciales Registradas Correctamente StatusCode: 204' ,'',{duration: 2000});
       this.form.reset();
+      sessionStorage.setItem('key', this.credential.key); 
+      sessionStorage.setItem('shared_secret', this.credential.shared_secret);
     });
   }
 

@@ -1,12 +1,14 @@
 var express = require("express");
 var app = express();
 
+var mdAuth = require('../middlewares/authenticate')
+
 const LocalStorage = require("node-localstorage").LocalStorage;
 localStorage = new LocalStorage("./storage");
 localStorage.setItem("credentials", "[]");
 
 // Method POST to Message
-app.post("/", (req, res) => {
+app.post("/", mdAuth.aunthenticate,(req, res) => {
   var body = req.body;
   var message = req.body.message;
   var tags = req.body.tags;
@@ -26,7 +28,7 @@ app.post("/", (req, res) => {
 });
 
 //Method To Get All Messages
-app.get("/", (req, res) => {
+app.get("/",mdAuth.aunthenticate, (req, res) => {
 
 var messages = JSON.parse(localStorage.getItem("messages"));
 
@@ -38,14 +40,14 @@ if (messages.length > 0) {
 } else {
   res.status(404).json({
     status: false,
-    msg: "No Encontrado",
+    message: "No Encontrado",
   });
 }
 });
 
 
 // Method Get to Messages FindByTAGS
-app.get("/:tag", (req, res) => {
+app.get("/:tag", mdAuth.aunthenticate, (req, res) => {
     let {tag} = req.params;    
 
   console.log("Entro a Tag");
@@ -77,7 +79,7 @@ app.get("/:tag", (req, res) => {
 
 
 // Method Get to Message FindByID
-app.get("/findID/:id", (req, res) => {
+app.get("/findID/:id", mdAuth.aunthenticate, (req, res) => {
     let {id} = req.params;
 
   var messages = JSON.parse(localStorage.getItem("messages"));

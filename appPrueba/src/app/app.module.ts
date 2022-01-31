@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { InterceptorService } from './core/interceptors/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,11 @@ import { MaterialModule } from './material.module';
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [{ 
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

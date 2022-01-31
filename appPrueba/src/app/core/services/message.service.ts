@@ -20,7 +20,7 @@ export class MessageService {
     private _snackBar: MatSnackBar
   ) {}
 
-  // Service to GET Message
+  // Service to GET Messages
   getAllMessages(): any {
     const url = this.API_URL + 'message';
     return this.http.get(url).pipe(
